@@ -1,0 +1,16 @@
+bootstrap_menu:
+  menus:
+    main:
+      items:
+        owner:
+          label: 'owner'
+          route: 'owner_index'
+        room:
+          label: 'room'
+          route: 'room_index'
+        region:
+          label: 'region'
+          route: 'region_index'
+        reservation:
+          label: 'reservation'
+          route: 'reservation_index'

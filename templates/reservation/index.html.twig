@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation index{% endblock %}
+
+{% block body %}
+    <a class="btn btn-primary" href="{{ path('reservation_new') }}">Create New Reservation</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>ArrivalDate</th>
+                <th>LeaveDate</th>
+                <th>Pay</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.id }}</td>
+                <td>{{ reservation.arrivalDate ? reservation.arrivalDate|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.leaveDate ? reservation.leaveDate|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.pay ? 'Yes' : 'No' }}</td>
+                <td>
+
+                    <a class="btn btn-info" href="{{ path('reservation_show', {'id': reservation.id}) }}">Show</a>
+                    <a class="btn btn-info" href="{{ path('reservation_edit', {'id': reservation.id}) }}">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

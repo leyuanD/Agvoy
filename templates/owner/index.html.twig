@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Owner index{% endblock %}
-
-{% block body %}
-    <h1>Owner index</h1>
+{% block head %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">{% endblock %}
+{% block main %}
+    <a class="btn btn-primary" href="{{ path('owner_new') }}">Create New Owner</a>
 
     <table class="table">
         <thead>
@@ -25,8 +26,8 @@
                 <td>{{ owner.address }}</td>
                 <td>{{ owner.country }}</td>
                 <td>
-                    <a href="{{ path('owner_show', {'id': owner.id}) }}">show</a>
-                    <a href="{{ path('owner_edit', {'id': owner.id}) }}">edit</a>
+                    <a class="btn btn-info" href="{{ path('owner_show', {'id': owner.id}) }}">Show</a>
+                    <a class="btn btn-info" href="{{ path('owner_edit', {'id': owner.id}) }}">Edit</a>
                 </td>
             </tr>
         {% else %}
@@ -36,6 +37,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('owner_new') }}">Create new</a>
+    
 {% endblock %}

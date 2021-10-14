@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @Route("/owner")
@@ -35,6 +36,13 @@ class OwnerController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Change content-type according to image's
+            $imagefile = $owner->getImageFile();
+            if($imagefile) {
+                $mimetype = $imagefile->getMimeType();
+                $owner->setContentType($mimetype);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($owner);
             $entityManager->flush();
@@ -90,5 +98,88 @@ class OwnerController extends AbstractController
         }
 
         return $this->redirectToRoute('owner_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     */
+    private $imageName;
+
+    /**
+     * @Vich\UploadableField(mapping="owners", fileNameProperty="imageName")
+     * @var File
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @var \DateTime
+     */
+    private $imageUpdatedAt;
+
+    //...
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+        // It is required that at least one field changes if you are using doctrine
+        // otherwise the event listeners won't be called and the file is lost
+        $this->imageUpdatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+        /**
+     * Mark a task as current priority in the user's session
+     * 
+     * @Route("/mark/{id}", name="owner_mark", requirements={ "id": "\d+"}, methods="GET")
+     */
+    public function markAction(owner $owner): Response
+    {
+        dump($owner);
+        $id = $owner->getId();
+        $urgents = $this->get('session')->get('urgents');
+        // si l'identifiant n'est pas présent dans le tableau des urgents, l'ajouter
+        
+        if (! in_array($id, $urgents) ) 
+        {
+            $urgents[] = $id;
+        }
+        else
+        // sinon, le retirer du tableau
+        {
+            $urgents = array_diff($urgents, array($id));
+        }
+
+
+        $this->get('session')->set('urgents', $urgents);
+        return $this->redirectToRoute('owner_show', 
+        ['id' => $owner->getId()]);
     }
 }

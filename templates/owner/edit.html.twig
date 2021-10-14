@@ -2,12 +2,20 @@
 
 {% block title %}Edit Owner{% endblock %}
 
-{% block body %}
+{% block main %}
     <h1>Edit Owner</h1>
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-7">
+            {{ include('owner/_form.html.twig', {'button_label': 'Update'}) }}
+        </div>
+        <div class="col-md-3">
+            <a class="btn btn-primary" href="{{ path('owner_index') }}">Back to List</a>
+             {{ include('owner/_delete_form.html.twig') }}
+        </div>
+    </div>
 
-    {{ include('owner/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('owner_index') }}">back to list</a>
-
-    {{ include('owner/_delete_form.html.twig') }}
+    
 {% endblock %}

@@ -23,12 +23,24 @@
                 <th>Country</th>
                 <td>{{ region.country }}</td>
             </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{ vich_uploader_asset(region, 'imageFile') }}"/></td>
+            </tr>
+            <tr>
+                <th>Rooms in this region</th>
+                <td>
+                    {% for room in region.room %}
+                        <a href="{{path('room_show',{'id':room.id})}}">{{room.id}}</a>
+                    {% endfor %}
+                </td>
+            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('region_index') }}">back to list</a>
 
-    <a href="{{ path('region_edit', {'id': region.id}) }}">edit</a>
+    <a class="btn btn-primary" href="{{ path('region_index') }}">Back to List</a>
+    <a class="btn btn-primary" href="{{ path('region_edit', {'id': region.id}) }}">Edit</a>
 
     {{ include('region/_delete_form.html.twig') }}
 {% endblock %}

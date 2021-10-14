@@ -35,11 +35,20 @@ class RoomController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Change content-type according to image's
+            $imagefile = $room->getImageFile();
+            if($imagefile) {
+                $mimetype = $imagefile->getMimeType();
+                $room->setContentType($mimetype);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($room);
             $entityManager->flush();
-
+            // Make sure message will be displayed after redirect
+            $this->get('session')->getFlashBag()->add('message', 'Bien ajouté');
             return $this->redirectToRoute('room_index', [], Response::HTTP_SEE_OTHER);
+
+            /* return $this->redirectToRoute('room_index', [], Response::HTTP_SEE_OTHER); */
         }
 
         return $this->render('room/new.html.twig', [
@@ -90,5 +99,36 @@ class RoomController extends AbstractController
         }
 
         return $this->redirectToRoute('room_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * Mark a task as current priority in the user's session
+     * 
+     * @Route("/mark/{id}", name="room_mark", requirements={ "id": "\d+"}, methods="GET")
+     */
+    public function markAction(room $room): Response
+    {
+        dump($room);
+        $id = $room->getId();
+        $urgents = $this->get('session')->get('urgents');
+        // si l'identifiant n'est pas présent dans le tableau des urgents, l'ajouter
+        if(! is_array($urgents))
+        {
+            $urgents = array();
+        }
+        if (! in_array($id, $urgents) ) 
+        {
+            $urgents[] = $id;
+        }
+        else
+        // sinon, le retirer du tableau
+        {
+            $urgents = array_diff($urgents, array($id));
+        }
+
+
+        $this->get('session')->set('urgents', $urgents);
+        return $this->redirectToRoute('room_show', 
+        ['id' => $room->getId()]);
     }
 }
