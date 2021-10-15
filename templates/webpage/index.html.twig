@@ -22,7 +22,7 @@
     <body>
         <!--================Header Area =================-->
         <header class="header_area">
-            <div class="container">
+            <div class="container" style="max-width: 1300px;">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <a class="navbar-brand logo_h" href="{{path('webindex')}}"><img src="image/Logo.png" alt=""></a>                    
@@ -47,7 +47,17 @@
                             </li> 
                             <li class="nav-item"><a class="nav-link" href="{{path('elements')}}">Elemests</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{path('contact')}}">Contact</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{path('tashboard')}}">backoffice</a></li>
+                            {% if is_granted('ROLE_ADMIN')%}
+                            <li class="nav-item"><a class="nav-link" href="{{path('dashboard')}}">backoffice</a></li>
+                             {% endif %}
+                             {% if app.user%}
+                            <li class="nav-item w-20"><a class="nav-link" href="#">{{app.user.getUsername()}}</a></li>
+                              <li class="nav-item w-20"><a class="nav-link" href="{{path('app_logout')}}">logout</a></li>
+                              {% else %}
+                              <li class="nav-item "><a class="nav-link" href="{{path('app_login')}}">login</a></li>
+
+                            
+                            {% endif %}
                         </ul>
                     </div> 
                 </nav>
@@ -68,8 +78,40 @@
 					</div>
 				</div>
             </div>
+
+            
             <div class="hotel_booking_area position">
                 <div class="container">
+
+                       <!-- choisir par region -->
+                <div>
+                        <div style="
+                                margin: 0 auto;
+                                width: 300px;
+                            ">
+                        <a class="navbar-brand logo_h" href="{{path('webindex')}}" style = ""></a>                    
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContentRegion" aria-controls="navbarSupportedContent"  >
+                            <p style="font-size:28px;color:white">Choisis par region</p>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse offset" id="navbarSupportedContentRegion">
+                            <ul class="nav navbar-nav menu_nav ml-auto">
+                            {% for region in regions%}
+
+                                <li class="nav-item active"><a class="nav-link" href="{{path('region_show',{'id':region.id})}}">{{region.name}}</a></li> 
+                            
+                                {% endfor %}
+                            
+                            </ul>
+                        </div> 
+                        </div>
+                    </div>
+
+
+
                     <div class="hotel_booking_table">
                         <div class="col-md-3">
                             <h2>Book<br> Your Room</h2>
@@ -154,7 +196,7 @@
                                 <a href="#" class="btn theme_btn button_hover">Book Now</a>
                             </div>
                             <a href="#"><h4 class="sec_h4">Double Deluxe Room</h4></a>
-                            <h5>$250<small>/night</small></h5>
+                            <h5>$99<small>/night</small></h5>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
@@ -164,7 +206,7 @@
                                 <a href="#" class="btn theme_btn button_hover">Book Now</a>
                             </div>
                             <a href="#"><h4 class="sec_h4">Single Deluxe Room</h4></a>
-                            <h5>$200<small>/night</small></h5>
+                            <h5>$66<small>/night</small></h5>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
@@ -174,7 +216,7 @@
                                 <a href="#" class="btn theme_btn button_hover">Book Now</a>
                             </div>
                             <a href="#"><h4 class="sec_h4">Honeymoon Suit</h4></a>
-                            <h5>$750<small>/night</small></h5>
+                            <h5>$75<small>/night</small></h5>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
@@ -184,7 +226,7 @@
                                 <a href="#" class="btn theme_btn button_hover">Book Now</a>
                             </div>
                             <a href="#"><h4 class="sec_h4">Economy Double</h4></a>
-                            <h5>$200<small>/night</small></h5>
+                            <h5>$66<small>/night</small></h5>
                         </div>
                     </div>
                 </div>

@@ -25,13 +25,13 @@
             </tr>
             <tr>
                 <th>Image</th>
-                <td><img src="{{ vich_uploader_asset(region, 'imageFile') }}"/></td>
+                <td><img src="{{ vich_uploader_asset(region, 'imageFile') }}" width="65%"/></td>
             </tr>
             <tr>
                 <th>Rooms in this region</th>
                 <td>
-                    {% for room in region.room %}
-                        <a href="{{path('room_show',{'id':room.id})}}">{{room.id}}</a>
+                    {% for chambre in region.room %}
+                        <a href="{{path('room_show',{'id':chambre.id})}}">{{chambre.id }} {{ chambre.summary }}</a>
                     {% endfor %}
                 </td>
             </tr>

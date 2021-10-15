@@ -1,5 +1,34 @@
+# AGVOY
 
+Un WEB assistant !  
+
+## Les étapes obligatoires réalisées
+ 1. prise de connaissance du  [cahier des charges] 
+ 2. initialisation du projet Symfony
+ 3. ajout au modèle des données des entités liées _Propriétaire_ et _Couette-et-café_
+ 4. ajout d'une association entre _Couette et café_ et _Propriétaire_
+ 5. ajout de l'entités _Région_
+ 6. ajout d'une association entre _Régions_ et _Couette et cafés_
+ 7. ajout d'une association entre _Régions_ et _Couette et cafés_
+ 8. ajout de données de tests chargeables avec les fixtures
+ 9. création du "front-office" de _consultation des Annonces par région_(webpage: accomondation)
+ 10. ajout des menus de navigation dans l'application
+
+## Les étapes recommandées réalisées
+
+ 1. gestion du code source avec Git
+ 2. ajout de l'authentification (ex: email: leyuan.ding@telecom-sudparis.eu mot-de-pass: lding)
+ 3.   ajout de mise en forme avec Bootstrap (ou un autre framework CSS)
+ 4. particularisation de l'affichage des pages selon le profil d'utilisateur
+ 5. protection de l'accès aux routes interdites selon le profil
+ 6. ajout de la gestion de la mise en ligne d'images pour des photos dans les annonces
+ 7. ajout de l'entité _Client_(name : user)
+ 8. ajout de l'entité _Réservation_(name : Reservation)
+ 9. ajout de CRUDs en "backoffice"
+ 10. utilisation des messages flash pour les CRUDs 
 ```
+
+## L'architecture du projets
 agvoy-app
 ├─ .env
 ├─ .env.test
@@ -144,62 +173,18 @@ agvoy-app
 │  │  │  ├─ add.jpg
 │  │  │  ├─ author.png
 │  │  │  ├─ blog-1.jpg
-│  │  │  ├─ blog-2.jpg
-│  │  │  ├─ blog-3.jpg
-│  │  │  ├─ c1.jpg
-│  │  │  ├─ c2.jpg
-│  │  │  ├─ c3.jpg
-│  │  │  ├─ c4.jpg
-│  │  │  ├─ c5.jpg
-│  │  │  ├─ c6.jpg
+│  │  │  ├─ ...
 │  │  │  ├─ cat-post
-│  │  │  │  ├─ cat-post-1.jpg
-│  │  │  │  ├─ cat-post-2.jpg
-│  │  │  │  └─ cat-post-3.jpg
+│  │  │  │  ├─ ...
 │  │  │  ├─ feature-img1.jpg
 │  │  │  ├─ main-blog
-│  │  │  │  ├─ m-blog-1.jpg
-│  │  │  │  ├─ m-blog-2.jpg
-│  │  │  │  ├─ m-blog-3.jpg
-│  │  │  │  ├─ m-blog-4.jpg
-│  │  │  │  └─ m-blog-5.jpg
+│  │  │  │  ├─ m-blog-1.jpg...
 │  │  │  ├─ next.jpg
-│  │  │  ├─ post-img1.jpg
-│  │  │  ├─ post-img2.jpg
-│  │  │  ├─ post1.jpg
-│  │  │  ├─ post2.jpg
-│  │  │  ├─ post3.jpg
-│  │  │  ├─ post4.jpg
+│  │  │  ├─ post-img1.jpg...
 │  │  │  ├─ prev.jpg
 │  │  │  └─ s-img.jpg
 │  │  ├─ elements
-│  │  │  ├─ a.jpg
-│  │  │  ├─ a2.jpg
-│  │  │  ├─ d.jpg
-│  │  │  ├─ disabled-check.png
-│  │  │  ├─ disabled-radio.png
-│  │  │  ├─ f1.jpg
-│  │  │  ├─ f2.jpg
-│  │  │  ├─ f3.jpg
-│  │  │  ├─ f4.jpg
-│  │  │  ├─ f5.jpg
-│  │  │  ├─ f6.jpg
-│  │  │  ├─ f7.jpg
-│  │  │  ├─ f8.jpg
-│  │  │  ├─ g1.jpg
-│  │  │  ├─ g2.jpg
-│  │  │  ├─ g3.jpg
-│  │  │  ├─ g4.jpg
-│  │  │  ├─ g5.jpg
-│  │  │  ├─ g6.jpg
-│  │  │  ├─ g7.jpg
-│  │  │  ├─ g8.jpg
-│  │  │  ├─ primary-check.png
-│  │  │  ├─ primary-radio.png
-│  │  │  ├─ success-check.png
-│  │  │  ├─ success-radio.png
-│  │  │  ├─ user1.png
-│  │  │  ├─ user2.png
+│  │  │  ├─ a.jpg...
 │  │  │  └─ _DS_Store
 │  │  ├─ facilites_bg.jpg
 │  │  ├─ favicon.png
@@ -215,13 +200,7 @@ agvoy-app
 │  │  │  ├─ 05.jpg
 │  │  │  └─ 06.jpg
 │  │  ├─ instagram
-│  │  │  ├─ Image-01.jpg
-│  │  │  ├─ Image-02.jpg
-│  │  │  ├─ Image-03.jpg
-│  │  │  ├─ Image-04.jpg
-│  │  │  ├─ Image-05.jpg
-│  │  │  ├─ Image-06.jpg
-│  │  │  ├─ Image-07.jpg
+│  │  │  ├─ Image-01.jpg...
 │  │  │  └─ Image-08.jpg
 │  │  ├─ logo-2.png
 │  │  ├─ Logo.png

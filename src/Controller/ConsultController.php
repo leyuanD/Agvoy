@@ -6,15 +6,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\RegionRepository;    
+
 class ConsultController extends AbstractController
 {
     /**
-     * @Route("/index", name="webindex")
+     * @Route("/" ,name="webindex")
      */
-    public function index(): Response
+    public function index(RegionRepository $regionRepository): Response
     {
         return $this->render('webpage/index.html.twig', [
             'controller_name' => 'ConsultController',
+            'regions' => $regionRepository->findAll(),
         ]);
     }
       /**
@@ -85,11 +87,11 @@ class ConsultController extends AbstractController
     }
 
        /**
-     * @Route("/tashboard", name="tashboard")
+     * @Route("/dashboard", name="dashboard")
      */
-    public function tashboard(): Response
+    public function dashboard(): Response
     {
-        return $this->render('/tashboard.html.twig', [
+        return $this->render('/dashboard.html.twig', [
             'controller_name' => 'ConsultController',
         ]);
     }
