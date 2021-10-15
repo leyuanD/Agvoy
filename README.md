@@ -1,6 +1,10 @@
 # AGVOY
-
 Un WEB assistant !  
+E:\PHP\agvoy\agvoy-app
+github: https://github.com/leyuanD/Agvoy/tree/master
+## Author
+PRENOM: LEYUAN  NOM:DING
+Email: leyuan.ding@telecom-sudparis.eu
 
 ## Les étapes obligatoires réalisées
  1. prise de connaissance du  [cahier des charges] 
