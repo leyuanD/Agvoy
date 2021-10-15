@@ -6,6 +6,19 @@ github: https://github.com/leyuanD/Agvoy/tree/master
 PRENOM: LEYUAN  NOM:DING
 Email: leyuan.ding@telecom-sudparis.eu
 
+## Test users
+admin:
+email: admin@mediaforce.com
+password: some 
+
+backoffice:
+email:projet@gmail.com
+password: 123456
+
+client:
+email:php@gmail.com
+password: 123456
+
 ## Les étapes obligatoires réalisées
  1. prise de connaissance du  [cahier des charges] 
  2. initialisation du projet Symfony

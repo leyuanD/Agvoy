@@ -14,3 +14,6 @@ bootstrap_menu:
         reservation:
           label: 'reservation'
           route: 'reservation_index'
+        user:
+          label: 'user'
+          route: 'user_index'
